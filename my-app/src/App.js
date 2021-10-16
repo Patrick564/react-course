@@ -1,22 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react'
 
-const Li = ({ children }) => {
-  return (
-      <li className='class-li'>
-          {children}
-      </li>
-  )
-}
+class App extends Component {
+    state = {
+        value: 3,
+    }
 
-function App() {
-  //  const valor = 'feliz'
-
-  return (
-      <ul className='class-css'>
-        <Li state='feliz'>Valor de li</Li>
-      </ul>
-  )
+    render() {
+        console.log(this.state)
+        return (
+            <div>
+                <p>Hello world</p>
+                <button className={`${this.state.value}`} onClick={() => this.setState({ value: 2 })}>
+                    Send
+                </button>
+            </div>
+        )
+    }
 }
 
 export default App
