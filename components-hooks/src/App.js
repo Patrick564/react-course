@@ -1,45 +1,21 @@
-import { useState, useEffect } from 'react'
-
-// Hooks rules
-// Not for use in loop, conditionals, while, etc only in the top of component
-// Just for React Components or Custom Hooks
-// A custom Hook ever is call as use* at first
-const useCounter = (initial) => {
-    const [counter, setCounter] = useState(initial)
-
-    const increment = () => {
-        setCounter(counter + 1)
-    }
-
-    return [counter, increment]
-}
-
-const Interval = ({ counter }) => {
-    useEffect(() => {
-        const i = setInterval(() => {
-            console.log(counter)
-        }, 1000)
-
-        return () => clearInterval(i)
-    }, [counter])
-
-    return (
-        <p>Interval</p>
-    )
-}
+import { useRef } from 'react'
 
 const App = () => {
-    let [counter, increment] = useCounter(0)
-    useEffect(() => {
-        document.title = counter
-        console.log('i am an effect')
-    }, [counter])
+    const ref = useRef()
+    const inputRef = useRef()
+    const click = () => {
+        console.log(ref.current)
+        ref.current.innerHTML = 'Chanchito'
+    }
+    const focus = () => {
+        inputRef.current.focus()
+    }
 
     return (
         <div>
-            Counter: {counter}
-            <button onClick={increment}>Increment</button>
-            <Interval counter={counter} />
+            <input ref={inputRef} type="text"/>
+            <button onClick={focus}>Focus</button>
+            <div onClick={click} ref={ref}>Lala</div>
         </div>
     )
 }
